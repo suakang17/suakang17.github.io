@@ -29,7 +29,6 @@ description:           >
 
 # A shorter description for the sidebar.
 tagline:               갈리면서 성장하는 기술 블로그
-
 # A list of keywords for your blog
 keywords:              [coding, developer, android, web, cloud, blog, sua]
 
@@ -37,7 +36,6 @@ keywords:              [coding, developer, android, web, cloud, blog, sua]
 # If provided, it will be shown at the top of the sidebar.
 # It also used by the `jekyll-seo-tag` plugin.
 logo:                  /assets/img/loo.jpeg
-
 # This should be the same author as first entry in `_data/authors.yml`.
 author:
   # Used by `jekyll-feed`:
@@ -91,7 +89,6 @@ theme: jekyll-theme-hydejack
 # Sidebar image and theme color of the site.
 accent_image:          /assets/img/ba.jpg!d
 accent_color:          rgb(79,177,186)
-
 # This is used for the `theme-color` meta tag,
 # which changes the background color of the browser UI in certain browsers.
 # Defaults to `accent_color`.
