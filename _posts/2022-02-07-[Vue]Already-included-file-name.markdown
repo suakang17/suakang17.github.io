@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Vue]Already included file name 에러"
-date:   2022-01-05 15:44:13 +0900
+date:   2022-02-05 15:44:13 +0900
 categories: Devlife
 ---
 
@@ -16,11 +16,11 @@ Already included file name 'C:/Users/.../파일이름1.vue' differs from file na
 해결방법은 두가지가 있다.
 
 
-# 해결법 1
+## 해결법 1
  VS CODE를 종료했다가 재시작한다.
  알아서 변경사항(이번 경우는 파일명) 업데이트를 해준다.
 
- # 해결법 2
+ ## 해결법 2
  'jsconfig.json' 파일에 들어가서 아래 코드를 추가해주자.
  ```
 "forceConsistentCasingInFileNames": false
