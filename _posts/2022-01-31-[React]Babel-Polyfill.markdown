@@ -5,7 +5,7 @@ date:   2022-01-31 12:49:10 +0900
 categories: Devlife
 ---
 
-# [React]Babel-Polyfill only one 에러
+# [React] Babel-Polyfill only one 에러
 ## Babel이란? 
 Babel은 자바스크립트 컴파일러로, 주로 ECMAScript 2015+ 코드(넷스케이프에서 javascript의 핵심개발언어를 ECMA 인터내셔널에 제출하고 표준화시켜 발표된 표준 스크립트 기술 규격)를 오래된 브라우저나
 환경에서 호환되는 과거 버전의 자바스크립트로 변환시키는데 사용되는 툴체인이다.

@@ -32,4 +32,4 @@ Already included file name 'C:/Users/.../파일이름1.vue' differs from file na
  
 출처 [stack overflow][stack-overflow]
 
- [stack-overflow] : https://stackoverflow.com/questions/51197940/file-name-differs-from-already-included-file-name-only-in-casing-on-relative-p#
+ [stack-overflow]:https://stackoverflow.com/questions/51197940/file-name-differs-from-already-included-file-name-only-in-casing-on-relative-p#
