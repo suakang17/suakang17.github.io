@@ -5,7 +5,7 @@ date:   2022-02-05 15:44:13 +0900
 categories: Devlife
 ---
 
-# [Vue.js] Already included file name 오류
+# [Vue] Already included file name 오류
 VS CODE로 Vue 작업 중 파일 이름을 남이 봐도 무슨 파일인 줄 알 수 있을만한 것으로 변경을 했는데 대뜸 오류가 출현했다 !! 
 ```
 Already included file name 'C:/Users/.../파일이름1.vue' differs from file name 'C:/Users/.../파일이름2.vue' only in casing.
@@ -20,7 +20,7 @@ Already included file name 'C:/Users/.../파일이름1.vue' differs from file na
  VS CODE를 종료했다가 재시작한다.
  알아서 변경사항(이번 경우는 파일명) 업데이트를 해준다.
 
- ## 해결법 2
+## 해결법 2
  'jsconfig.json' 파일에 들어가서 아래 코드를 추가해주자.
  ```
 "forceConsistentCasingInFileNames": false
