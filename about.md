@@ -20,7 +20,6 @@ font-weight:bold">
 </span>
 </center>
 
-<center>MAJOR : -</center>
 
 <center>Pusan National University</center>
 
