@@ -4,8 +4,56 @@ title:  "[스터디]당근마켓 클론코딩 정리"
 date:   2022-02-05 15:44:13 +0900
 categories: Projects
 ---
-# [스터디]당근마켓 클론코딩 얻어간 내용들
+# [스터디] 당근마켓 클론코딩 얻어간 내용들
 
-> [당근마켓 클론코딩 스터디 포스팅](https://suakang17.github.io/projects/2022-02-05-React-%EB%8B%B9%EA%B7%BC%EB%A7%88%EC%BC%93-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9/)에 연결된 포스팅입니다.
+> 이 포스팅은 [당근마켓 클론코딩 스터디 포스팅](https://suakang17.github.io/projects/2022-02-05-React-%EB%8B%B9%EA%B7%BC%EB%A7%88%EC%BC%93-%ED%81%B4%EB%A1%A0%EC%BD%94%EB%94%A9/)에 연결된 포스팅입니다.
 
-#
+# HTML/CSS 이슈
+
+1. Using target=_blank without rel=noopener noreferrer is a security risk 이슈  
+
+category: warning
+```
+Using target="_blank" without rel="noreferrer" (which implies rel="noopener" is a security risk in older browsers: see https://mathiasbynens.github.io rel-noopener/#recommendations
+```
+- 작성하는 페이지가 Tabnabbing이라는 피싱 공격에 노출될 수 있기 때문
+- Tabnabbing 공격: target_blank인 태그를 클릭시 새롭게 열린 탭에서 기존 페이지를 피싱페이지로 바꿔 정보를 탈취하는 것
+- 해결방법  
+내용에서 확인 가능하듯 target="_blank"와 rel="rel=noopener noreferrer" 속성을 함께 적용하면 해결된다.
+rel="rel=noopener noreferrer"는 rel=noopener 속성이 부여된 링크를 통해 열린 탭은 opener의 location 변경과 같은 js 요청을 변경하기 때문이다.
+- 2021 업데이트로 대다수의 브라우저들은 자동적으로 target="_blank"에 해당하는 링크에 rel="noopener"의 역할을 자동적으로 적용하도록 했다고 한다. 아마 이제 중요도 낮은 이슈인듯.  
+출처 [stackoverflow](https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable)
+
+2. The href attribute requires a valid value to be accessible 이슈  
+
+category: warning
+```
+The href attribute requires a valid value to be accessible. Provide a valid, navigable address as the href value. If you cannot provide a valid href, but still need the element to resemble a link, use a 
+```
+- anchor 태그 사용시 href 속성의 유효값이 필요하다는 것으로,   나는 href값을 공란으로 두어서 문제가 되었다.
+- 해결방법
+```
+            <a href="#!">내용</a>
+                    또는,
+        <a href="{() => false}">내용</a> 
+                  사용하기
+```
+
+# HTML/CSS 지식
+
+1. select box custom css 
+
+footer.jsx
+```
+/*-o-appearance: none;
+    -webkit-appearance: none; =>의미없음*/
+    -moz-appearance: none;
+    appearance: none;
+    => dropdown 기본 세팅 초기화 (chrome, ie ver별로 적용사항 다름)
+
+border: none; => 박스 보더 없애기
+vertical-align: top; => vertical alignment 지정
+text-underline-position: under; => 조금 더 아래에 밑줄 생성
+```
+
+header.jsx
