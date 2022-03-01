@@ -21,13 +21,6 @@ img는 alt prop을 반드시 가져야한다는 오류라, 우선 alt prop을 �
 <img className='header-logo' src='./img/header_logo.svg' alt='headerlogo' />
 ```
 
-##  alt 속성이란?
-
-
-
-
-
-
 alt속성을 추가했는데도 엑박이 사라지지 않았다.
 
 기존에 리액트가 아닌 일반 html을 작성시에 이런 에러가 뜨는 경우 항상 경로의 문제였기에 경로부터 재차 확인했는데 경로에는 문제가 없었다.

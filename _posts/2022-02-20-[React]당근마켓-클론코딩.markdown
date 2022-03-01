@@ -56,6 +56,7 @@ categories: Projects
 
 ### 협업 툴
 - Git, [Github](https://github.com/CarrotMarket-Clone)
+- 개인 레포인 CarrotMarket-Clone-Front-sua 에도 main, dev 브랜치를 두어 dev로 푸시해둔 후 main으로 merge하기로 했다.
 
 ## 4. 주요 기능 소개
 

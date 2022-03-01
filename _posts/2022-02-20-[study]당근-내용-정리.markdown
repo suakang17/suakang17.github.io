@@ -39,6 +39,25 @@ The href attribute requires a valid value to be accessible. Provide a valid, nav
                   사용하기
 ```
 
+3. Http 403 forbidden 이슈
+
+- Home.jsx 의 home-main-image-top 이미지를 원본 소스에 저장된 url을 통해 띄우려는 와중 발생했다. url에는 문제가 없고, 개발자 도구 상에도 사이징한 만큼의 이미지 영역이 반영되는데 이미지 로딩만 되지 않아 개발자 도구의 콘솔로 들어갔더니 해당 오류가 발생한 것을 확인할 수 있었다.  
+
+![pooh](/assets/img/docs/당근403에러.png)  
+
+- 내가 해당 url로 웹페이지를 탐색하려고 할 때 브라우저는 Http로 요청을 보내고, 이에 대한 응답으로 서버는 요청을 검사하고 문제가 없는 경우 로드해주기 전에 200번대의 성공 코드로 응답해준다.
+
+- 400번대 오류 코드로 응답했다면, 서버가 요청에서 문제를 발견한 경우이다.
+
+- 403의 경우 url이 유효하지만 내 요청을 이행할 수 없다는 의미이다.
++ 추가로 흔히 마주하는 404오류의 경우는 요청한 리소스 자체를 url상에서 찾을 수 없음을 의미한다.
+
+- 403의 경우 결론은 엑세스 거부이며 여러 우회 방법이 있는듯하다.
+
+- 우회 안하고 그냥 해당 이미지 url 접속후 저장하여 로드함
+    + png 파일이라 확대하면 깨질 줄 알았는데 안깨지더라  
+    ~~깨지는데 내 눈이 못 알아 본 걸지도~~
+
 # HTML/CSS 지식
 
 1. select box custom css 
@@ -56,4 +75,66 @@ vertical-align: top; => vertical alignment 지정
 text-underline-position: under; => 조금 더 아래에 밑줄 생성
 ```
 
-header.jsx
+<!--header.jsx-->
+
+2. letter spacing css
+home.jsx
+자간
+
+3. background-size와 width, height
+
+top-imgae.png를 불러오려고 했다.
+
+Home.css
+```
+기존코드 - 이미지 로드 안됨
+background-image: url(./img/image-top.png);
+<!--z-index: 30; 없어도 됨-->
+background-size: 804px 685px;
+position: absolute;
+right: -84px;
+bottom: 0;
+```  
+
+원본 소스를 보니 background-size 외에 따로 width, height값을 주더라.  
+나는 중복이라 생각하여 제거했었는데 그 때문에 로드가 안됐었던 것.
+
+```
+수정코드 - 이미지 로드 됨(width, height 추가)
+width: 804px;
+height: 685px; 
+background-image: url(./img/image-top.png);
+background-size: 804px 685px;
+position: absolute;
+right: -84px;
+bottom: 0;
+```
+
+- 이유
+
+3. inline-block, space-between
+- inline-block == inline의 특징과 block의 특징을 모두 가진 요소  
+- inline-block의 특징
+    + 줄바꿈 X
+    + width, height 지정 가능
+    + 만약 width와 height를 지정하지 않을 경우, inline과 같이 컨텐츠만큼 영역이 잡힘
+- inline-block 속성 추가하여 margin, padding 0으로 설정해도 좁혀지지 않던 space between의 간격과 가로 스크롤 생성되는 문제 해결
+- 기존의 div block 속성으로 text-area 내용들이 한 줄을 다 차지해서 자꾸 image-1,2,3 ..가 밀려나고, 그로 인해 가로 스크롤 생성된 듯
+
+
+
+# React 이슈
+
+1. Plugin "react" was conflicted between ... base.js 이슈
+
+```
+ ERROR in Plugin "react" was conflicted between "package.json » eslint-config-react-app » C:\Users\sooak\CarrotMarket-Clone-Front-Sua\client\node_modules\eslint-config-react-app\base.js" and "BaseConfig » C:\Users\sooak\CarrotMarket-Clone-Front-sua\client\node_modules\eslint-config-react-app\base.js".
+ ```
+
+ - Home.jsx 수정사항 변경하며 local로 다시 컴파일 하던 중 발생한 에러
+ - 원인: react 플러그인 간 충돌 (package.json타고 들어간 플러그인과 BaseConfig타고 들어간 플러그인간의 충돌로 보임)  
+ -> BaseConfig가 정확히 뭐지?
+ - 해결방법
+ ```
+ package.json을 열어서 ctrl+s 타이핑하기
+ ```
