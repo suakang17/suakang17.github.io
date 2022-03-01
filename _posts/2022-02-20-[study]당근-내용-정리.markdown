@@ -129,7 +129,7 @@ Header.jsx, css
 ex)
  <input id='fixed-menu-checkbox' className='fixed-checkbox' type='checkbox'></input>  
  <label for='fixed-menu-checkbox' className='fixed-label'>  
- ```
+```
 - label태그: input태그의 의미를 정의하는 용도, 또는 screen-reader유저를 위함
 보통 input태그가 있을때 어떤 입력창인지 앞의 텍스트를 보고 이해한다고 한다.
 label을 클릭하는 경우 해당 label이 설명하는 입력창도 활성화된다. (여기서는 체크박스이니 체크된다는 이야기)
@@ -143,7 +143,7 @@ ex)
  <svg className='menu-icon-svg' width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'>  
  <path d='M1 1L6 6L11 1' stroke='#4D5159' strokeLinecap='round' strokeLinejoin='round'></path>  
  </svg>
-```
+ ```
 - fill: 색상 채우기 속성
 - viewBox: svg 요소가 그려지는 영역에서 svg 요소의 크기를 확대, 축소하고 위치를 조정할 수 있는 속성  
 viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 크기가 자동으로 조절됨
@@ -178,7 +178,7 @@ ex)
 
 ```
  ERROR in Plugin "react" was conflicted between "package.json » eslint-config-react-app » C:\Users\sooak\CarrotMarket-Clone-Front-Sua\client\node_modules\eslint-config-react-app\base.js" and "BaseConfig » C:\Users\sooak\CarrotMarket-Clone-Front-sua\client\node_modules\eslint-config-react-app\base.js".
- ```
+```
 
  - Home.jsx 수정사항 변경하며 local로 다시 컴파일 하던 중 발생한 에러
  - 원인: react 플러그인 간 충돌 (package.json타고 들어간 플러그인과 BaseConfig타고 들어간 플러그인간의 충돌로 보임)  
