@@ -184,7 +184,7 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
  - 해결방법: package.json을 열어서 ctrl+s 타이핑하기
  
 
- ## 이미지 엑박
+## 이미지 엑박
  - [해결방법](https://suakang17.github.io/devlife/2022-02-05-React-jsx-img-error/)
  
  - [이유](https://stackoverflow.com/questions/43247696/javascript-require-vs-require-default)
@@ -232,7 +232,8 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
     + SEO(검색 엔진 최적화) 측면에서도 일반 웹사이트들과 차이가 있어서 검색 엔진에 의해 원치않는 방식으로 색인이 될 수 있음
 
 - Link tag vs a tag 
-    + The path in your anchor tag is a relative path while that one in the Link is absolute(17년도글임) [출처](https://stackoverflow.com/questions/43087007/react-link-vs-a-tag-and-arrow-function)
+    + The path in your anchor tag is a relative path while that one in the Link is absolute(17년도글임) 
+    [출처](https://stackoverflow.com/questions/43087007/react-link-vs-a-tag-and-arrow-function)  
     [더읽어보기](https://www.daleseo.com/react-router-basic/)
 
 # 기타
