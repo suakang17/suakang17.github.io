@@ -10,7 +10,7 @@ categories: Projects
 
 # HTML/CSS 이슈
 
-1. Using target=_blank without rel=noopener noreferrer is a security risk 이슈  
+## Using target=_blank without rel=noopener noreferrer is a security risk 이슈  
 
 category: warning
 ```
@@ -24,7 +24,7 @@ rel="rel=noopener noreferrer"는 rel=noopener 속성이 부여된 링크를 통�
 - 2021 업데이트로 대다수의 브라우저들은 자동적으로 target="_blank"에 해당하는 링크에 rel="noopener"의 역할을 자동적으로 적용하도록 했다고 한다. 아마 이제 중요도 낮은 이슈인듯.  
 출처 [stackoverflow](https://stackoverflow.com/questions/50709625/link-with-target-blank-and-rel-noopener-noreferrer-still-vulnerable)
 
-2. The href attribute requires a valid value to be accessible 이슈  
+## The href attribute requires a valid value to be accessible 이슈  
 
 category: warning
 ```
@@ -39,7 +39,7 @@ The href attribute requires a valid value to be accessible. Provide a valid, nav
                   사용하기
 ```
 
-3. Http 403 forbidden 이슈
+## Http 403 forbidden 이슈
 
 - Home.jsx 의 home-main-image-top 이미지를 원본 소스에 저장된 url을 통해 띄우려는 와중 발생했다. url에는 문제가 없고, 개발자 도구 상에도 사이징한 만큼의 이미지 영역이 반영되는데 이미지 로딩만 되지 않아 개발자 도구의 콘솔로 들어갔더니 해당 오류가 발생한 것을 확인할 수 있었다.  
 
@@ -60,55 +60,55 @@ The href attribute requires a valid value to be accessible. Provide a valid, nav
 
 # HTML/CSS 지식
 
-1. select box custom css 
+## select box custom css 
 
 footer.jsx
 ```
-/*-o-appearance: none;
+    /*-o-appearance: none;
     -webkit-appearance: none; =>의미없음*/
     -moz-appearance: none;
     appearance: none;
     => dropdown 기본 세팅 초기화 (chrome, ie ver별로 적용사항 다름)
 
-border: none; => 박스 보더 없애기
-vertical-align: top; => vertical alignment 지정
-text-underline-position: under; => 조금 더 아래에 밑줄 생성
+    border: none; => 박스 보더 없애기
+    vertical-align: top; => vertical alignment 지정
+    text-underline-position: under; => 조금 더 아래에 밑줄 생성
 ```
 
-2. letter spacing css == 자간
+## letter spacing css == 자간
 
-3. background-size와 width, height
+## background-size와 width, height
 
 top-imgae.png를 불러오려고 했다.
 
 Home.css
 ```
-기존코드 - 이미지 로드 안됨
-background-image: url(./img/image-top.png);
-<!--z-index: 30; 없어도 됨-->
-background-size: 804px 685px;
-position: absolute;
-right: -84px;
-bottom: 0;
+    기존코드 - 이미지 로드 안됨
+    background-image: url(./img/image-top.png);
+    <!--z-index: 30; 없어도 됨-->
+    background-size: 804px 685px;
+    position: absolute;
+    right: -84px;
+    bottom: 0;
 ```  
 
 원본 소스를 보니 background-size 외에 따로 width, height값을 주더라.  
 나는 중복이라 생각하여 제거했었는데 그 때문에 로드가 안됐었던 것.
 
 ```
-수정코드 - 이미지 로드 됨(width, height 추가)
-width: 804px;
-height: 685px; 
-background-image: url(./img/image-top.png);
-background-size: 804px 685px;
-position: absolute;
-right: -84px;
-bottom: 0;
+    수정코드 - 이미지 로드 됨(width, height 추가)
+    width: 804px;
+    height: 685px; 
+    background-image: url(./img/image-top.png);
+    background-size: 804px 685px;
+    position: absolute;
+    right: -84px;
+    bottom: 0;
 ```
 
 - 이유
 
-4. inline-block, space-between
+## inline-block, space-between
 - inline-block == inline의 특징과 block의 특징을 모두 가진 요소  
 - inline-block의 특징
     + 줄바꿈 X
@@ -117,12 +117,12 @@ bottom: 0;
 - inline-block 속성 추가하여 margin, padding 0으로 설정해도 좁혀지지 않던 space between의 간격과 가로 스크롤 생성되는 문제 해결
 - 기존의 div block 속성으로 text-area 내용들이 한 줄을 다 차지해서 자꾸 image-1,2,3 ..가 밀려나고, 그로 인해 가로 스크롤 생성된 듯
 
-5. input checkbox, label tag
+## input checkbox, label tag
 
 Header.jsx, css
 - checkbox: 체크박스는 input 태그로 만듦
 ```
-ex)
+ ex)
  <input id='fixed-menu-checkbox' className='fixed-checkbox' type='checkbox'></input>  
  <label for='fixed-menu-checkbox' className='fixed-label'>  
 ```
@@ -132,14 +132,14 @@ label을 클릭하는 경우 해당 label이 설명하는 입력창도 활성화
 
 - 여기서는 label 태그 안에 '다운로드'라는 텍스트, 버튼 모양(svg파일)과 그 경로가 들어가 있다. 즉 텍스트 또는 버튼을 클릭시 체크박스가 체크되어(활성화되어) 접혀있던 dropdown menu가 보이게 된다.
 
-6. svg 속성
+## svg 속성
 
-    ```
-    ex)
+```
+ ex)
  <svg className='menu-icon-svg' width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'>  
  <path d='M1 1L6 6L11 1' stroke='#4D5159' strokeLinecap='round' strokeLinejoin='round'></path>  
  </svg>
-    ```
+```
 - fill: 색상 채우기 속성
 - viewBox: svg 요소가 그려지는 영역에서 svg 요소의 크기를 확대, 축소하고 위치를 조정할 수 있는 속성  
 viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 크기가 자동으로 조절됨
@@ -160,7 +160,7 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
     - stroke: line 등의 색상  
     [기타 stroke 속성 더보기](https://www.w3schools.com/graphics/svg_stroking.asp)
 
-7. css에서의 더하기 기호("+") 의미
+## css에서의 더하기 기호("+") 의미
 - 지정된 요소 바로 뒤에 배치되지만 특정 요소 내부에 배치되지 않는 요소를 선택하는 데 사용
 ``` 
     .fixed-checkbox:checked+.fixed-label .menu-icon-svg {
@@ -168,14 +168,14 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
     }
 ```
 
-7. [css inherit되는 속성들](https://www.impressivewebs.com/inherit-value-css/)
+## [css inherit되는 속성들](https://www.impressivewebs.com/inherit-value-css/)
 
 # React 이슈
 
-1. Plugin "react" was conflicted between ... base.js 이슈
+## Plugin "react" was conflicted between ... base.js 이슈
 
 ```
- ERROR in Plugin "react" was conflicted between "package.json » eslint-config-react-app » C:\Users\sooak\CarrotMarket-Clone-Front-Sua\client\node_modules\eslint-config-react-app\base.js" and "BaseConfig » C:\Users\sooak\CarrotMarket-Clone-Front-sua\client\node_modules\eslint-config-react-app\base.js".
+    ERROR in Plugin "react" was conflicted between "package.json »     eslint-config-react-app »   C:\Users\sooak\CarrotMarket-Clone-Front-Sua\client\node_modules\eslint-config-    react-app\base.js" and "BaseConfig »    C:\Users\sooak\CarrotMarket-Clone-Front-sua\client\node_modules\eslint-config- react-app\base.js".
 ```
 
  - Home.jsx 수정사항 변경하며 local로 다시 컴파일 하던 중 발생한 에러
@@ -184,24 +184,24 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
  - 해결방법: package.json을 열어서 ctrl+s 타이핑하기
  
 
- 2. 이미지 엑박
+ ## 이미지 엑박
  - [해결방법](https://suakang17.github.io/devlife/2022-02-05-React-jsx-img-error/)
  
  - [이유](https://stackoverflow.com/questions/43247696/javascript-require-vs-require-default)
 
  [출처, 더보기](https://gomgomkim.tistory.com/11)
 
- 3. Matched leaf route at location "/" does not have an element 콘솔 에러
+## Matched leaf route at location "/" does not have an element 콘솔 에러
 
 /src/App.js 
 - 기존코드를 이렇게 작성하니 빈화면이 출력되어 콘솔을 확인해 본 결과 제목과 같은 에러가 발생했다.
 ```
-<Route exact path="/" component={Home} />
+    <Route exact path="/" component={Home} />
 ```
 - 원인: react-router-dom V6에서는 component prop이 element로 변경되어 더이상 component prop을 지원하지 않음  
 따라서 코드를 다음과 같이 수정하였더니 라우팅이 완성되었다.
 ```
-<Route exact path='/' element={<Home />} />
+    <Route exact path='/' element={<Home />} />
 ```
 
  [출처](https://stackoverflow.com/questions/69854011/matched-leaf-route-at-location-does-not-have-an-element)
@@ -209,14 +209,14 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
 
 # React 지식
 
-1. Router
+## Router
 - 설치
     + 사용하고자 하는 환경에 따라 설치할 라우터가 다르다. 나는 react-router-dom을 설치했다.
         + react-router - 웹&앱
         + react-router-dom - 웹
         + react-router-native -앱
     ```
-    npm i react-router-dom --save
+        npm i react-router-dom --save
     ```
     - 설치 직후 로컬환경을 실행시켜둔 터미널에 컴파일 에러가 발생했다.  
     module not found 에러여서 package.json 파일을 오픈하여 ctrl+s 했더니 바로 해결 되었다.
@@ -237,7 +237,7 @@ viewBox 속성을 이용하면 화면 크기에 따라(반응형) svg 요소의 
 
 # 기타
 
-1. Git 잔디 안심어지는 현상
+## Git 잔디 안심어지는 현상
 - 현재 당근마켓 클로닝 레포에는 2가지 브랜치가 생성되어있다.
     + dev 주로 작업하는 브랜치
     + main (default) 후에 dev에서 검토 후 merge할 브랜치
