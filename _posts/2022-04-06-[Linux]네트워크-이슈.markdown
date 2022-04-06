@@ -1,0 +1,45 @@
+---
+layout: post
+title:  "[Linux] 네트워크 이슈 / apt-get update 이슈"
+date:   2022-04-06 19:14:55 +0900
+categories: Devlife
+---
+# [Linux] 네트워크 이슈 / apt-get update 이슈
+>VMware, Ubuntu 20.04, Windows10
+
+## apt-get update 오류인줄 알았던 네트워크 오류
+<img src='../assets/img/docs/ubuntu_network_issue4.png' width='70%' />  
+
+잘만 되던 vmware 내 우분투 머신 2대가 모두 위와 같이 같은 에러가 발생했다.  
+학교 과제로 .c 파일을 bash로 생성해야하는데 vi 에디터를 사용하다 보니 속이 터져서 vim을 설치하려고 하다가 마주했다.  
+에러 코드 내 권한 이야기도 없고 애초에 sudo를 붙여 작성한 명령이라 뭘까 싶었으나 그냥 무시하고 apt get install vim을 쳤었다.  
+그랬더니 vim을 설치할 수 없다는 에러가 발생하여 구글링해보니 update 미실행이 원인이라고..  
+어찌됐든 update를 먼저 하는 것이 원칙이 맞는데다가 방법이 없어 update 에러 로그를 긁어다 붙여보기도 하고, 우분투 버전도 명시해보고 정말 할 수 있는 모든 방법을 적용해보았으나 먹히질 않았다.  
+결국 해당 가상머신 내부의 문제인가 해서 백업해두고 기존 머신을 삭제하고 새로 생성해보기도 했으나 같은 문제가 여전히 발생했다.  
+
+그러던 찰나 아는 분께 우는 소리를 했더니 혹시 네트워크 접속은 잘 되냐고 하더라.
+생각도 못한 방향이라 바로 8.8.8.8로 핑을 띄웠는데 네트워크 접속이 안된다는 문구가 떴다.  
+놀라서 파이어팍스로 구글에 접속해보려했는데 이 역시 서버에 접속할 수 없다고 나왔다.
+
+이 때부터 네트워크 관련으로 검색을 시도했고, 내가 해결한 방법은 아래와 같다.  
+우선 호스트 OS에서 제어판 > 네트워크 및 인터넷 > 네트워크 연결 로 들어가면 연결되어 있는 가상머신이 보인다.  
+(VMware ubuntu환경 아님, 참고로 본인은 윈도우 사용 중)
+
+<img src='../assets/img/docs/ubuntu_network_issue1.png' width='70%'/>
+
+문제가 있는 가상머신을 선택하면 '속성' 탭이, 선택하면 '공유' 탭이 존재한다.
+우선 여기 인터넷 연결 공유 내 체크박스가 체크되어 있어야한다. 
+
+<img src='../assets/img/docs/ubuntu_network_issue2.png' width='70%'/>
+
+또한 윈도우 검색창에 '서비스'라고 검색하거나 'Ctrl+r 누른 후 services.msc '를 치면 나오는 서비스에서 사용 중인 가상머신 툴(VMware, Virtualbox etc..)의 'NAT Service'가 실행중인지 확인하자. 나는 사용 안 함으로 변경되어 있어 바꿔주었다.  
+변경은 항목 더블 클릭 후 시작 유형을 변경하고 시작 버튼을 눌러주면 된다.
+
+<img src='../assets/img/docs/ubuntu_network_issue5.png' width='70%' />
+
+그러면 드디어 네트워크 접속이 정상적으로 이루어지며, apt-get update도 잘 실행되는 것을 확인할 수 있다.  
+~~사담이지만 정말 너무 기뻐서 소리질렀다.~~
+
+<img src='../assets/img/docs/ubuntu_network_issue3.png' width='70%'/>  
+
+[도움받은 블로그] [https://nirsa.tistory.com/16](https://nirsa.tistory.com/16) 감사합니다 :)
