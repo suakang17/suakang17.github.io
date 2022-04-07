@@ -8,7 +8,7 @@ categories: Devlife
 >VMware, Ubuntu 20.04, Windows10
 
 ## apt-get update 오류인줄 알았던 네트워크 오류
-<img src='../assets/img/docs/ubuntu_network_issue4.png' width='70%' />  
+<img src='/assets/img/docs/ubuntu_network_issue4.png' width='70%' />  
 
 잘만 되던 vmware 내 우분투 머신 2대가 모두 위와 같이 같은 에러가 발생했다.  
 학교 과제로 .c 파일을 bash로 생성해야하는데 vi 에디터를 사용하다 보니 속이 터져서 vim을 설치하려고 하다가 마주했다.  
@@ -25,7 +25,7 @@ categories: Devlife
 우선 호스트 OS에서 제어판 > 네트워크 및 인터넷 > 네트워크 연결 로 들어가면 연결되어 있는 가상머신이 보인다.  
 (VMware ubuntu환경 아님, 참고로 본인은 윈도우 사용 중)
 
-![pooh](/assets/img/docs/ubuntu_network_issue1.png')
+<img src='/assets/img/docs/ubuntu_network_issue1.png' width='70%' />
 
 문제가 있는 가상머신을 선택하면 '속성' 탭이, 선택하면 '공유' 탭이 존재한다.
 우선 여기 인터넷 연결 공유 내 체크박스가 체크되어 있어야한다. 
