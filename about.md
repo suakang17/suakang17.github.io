@@ -27,7 +27,7 @@ font-weight:bold">
 
 ## Personal Data
 ---
-> 1999.01.17 대한민국 서울특별시 서초구 출생
+> 1999.01.17 대한민국 서울특별시 출생
 
 > email: rkdtndk09@gmail.com
 
@@ -40,9 +40,11 @@ font-weight:bold">
 ## Project
 ## Experiences
 ---
--2021. 09 ~ Google Developer Students Club PNU member
+-2021. Sep ~ 2022. Feb Google Developer Students Club PNU 5th member
 
--2022. 01 ~ PROJECT BUSAN member
+-2022. Jan ~ PROJECT BUSAN member
+
+-2022. Mar ~ UMC PNU server track member
 ## Skills and Certification
 ---
 -Language : -
