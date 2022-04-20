@@ -15,7 +15,7 @@ categories: Devlife
 
 단순히 접속시간의 문제인가 싶다가, 저번의 우분투 내의 네트워크 이슈가 생각나 ip주소로 ping부터 찍어보았다.
 
-<img src='../assets/img/docs/winscp_issue1.png'>  
+<img src='/assets/img/docs/winscp_issue1.png'>  
 
 확실히 단순하게 WinSCP환경설정에서 접속시간 제한을 늘린다고 해결될 문제는 아닌듯.. 
 
@@ -24,7 +24,7 @@ categories: Devlife
 구글을 뒤져보다가 얼핏 저번에 보안그룹 설정을 만졌던 기억이 나서 보안그룹 규칙을 확인해보니 저번에 집에서 설정했던 ip로 내 ip로만 접속 가능하도록 제한을 걸어뒀었다. 
 
 따라서 해당 보안규칙의 소스를 '내 ip >> anywhere IPV4'로 변경해주고 winSCP 호스트 로그인을 다시 시도해보니 예전처럼 수월하게 접속되었다.
-<img src='../assets/img/docs/winscp_issue2.png'>
+<img src='/assets/img/docs/winscp_issue2.png'>
 
 ## 요약
 - 문제: winSCP 접속 안됨 - 네트워크 오류: 접속시간 초과
