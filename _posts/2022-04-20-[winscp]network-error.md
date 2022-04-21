@@ -41,7 +41,7 @@ categories: Devlife
 
 <img src='/assets/img/docs/winscp_issue4.png'>  
 
-<img src='../assets/img/docs/winscp_issue5.jpg'>
+<img src='/assets/img/docs/winscp_issue5.jpg'>
 엥 접속은 정상적으로 이루어졌던걸 확인할 수 있다.  
 
 추가로 로그까지 확인해봤는데 딱히 에러 메시지가 떠있는게 없었다.  
