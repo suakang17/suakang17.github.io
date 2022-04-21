@@ -1,8 +1,9 @@
 ---
 layout: post
-title:  "[Linux]Ubuntu설치, 사용기와 APM 소스설치기"
+title:  "[Linux] Ubuntu설치, 사용기와 APM 소스설치기"
 date:   2022-03-17 15:44:13 +0900
 categories: Devlife
+published: false
 ---
 
 # [Linux] Ubuntu설치, 사용기와 APM 소스설치기
