@@ -57,6 +57,6 @@ swap 메모리 설정 뒤, update upgrade가 잘 작동하고,
 - RAM 용량이 가득 차 데이터가 손실되거나 에러가 발생하는 것을 방지하기 위한 메모리 영역
 - 하드 디스크의 메모리를 RAM처럼 교환하여(swap) 사용하도록 해 시스템 메모리 공간 부족을 방지함
 
-[출처] https://it-serial.tistory.com/entry/Linux-Swap-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%B4%EB%9E%80-CPU-RAM-%ED%95%98%EB%93%9C-%EB%94%94%EC%8A%A4%ED%81%AC-%E2%91%A0
+[출처][(https://it-serial.tistory.com/entry/Linux-Swap-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%B4%EB%9E%80-CPU-RAM-%ED%95%98%EB%93%9C-%EB%94%94%EC%8A%A4%ED%81%AC-%E2%91%A0)](https://it-serial.tistory.com/entry/Linux-Swap-%ED%8C%8C%ED%8B%B0%EC%85%98%EC%9D%B4%EB%9E%80-CPU-RAM-%ED%95%98%EB%93%9C-%EB%94%94%EC%8A%A4%ED%81%AC-%E2%91%A0)
 
 
