@@ -3,17 +3,17 @@
 layout: list
 type: category
 # The title of the tag's page.
-title: Devlife
+title: Study
 
 # The name of the tag, used in a post's front matter (e.g. tags: [<slug>]).
-slug: Devlife
+slug: Study
 
 # (Optional) Write a short (~150 characters) description of this featured tag.
 description: >
-  Developing life, Trouble Shooting stuffs
+  Studying stuffs
 menu: true
 sidebar: true
-order: 1
+order: 3
 # (Optional) You can disable grouping posts by date.
 # no_groups: true
 
