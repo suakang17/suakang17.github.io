@@ -50,14 +50,13 @@ menu:
     url:               /devlife/
   - title:             Projects
     url:               /projects/
-  - title:             Algorithm
-    url:               /algorithm/
+ - title:             Study
+    url:               /study/
   - title:             About
     url:               /about/
   - title:             Etc
     url:               /etc/
-  - title:             Study
-    url:               /study/
+ 
 
 # Add links to the footer.
 # Typically you'll want to link to your cookie- or privacy policy (if appliable), etc..
