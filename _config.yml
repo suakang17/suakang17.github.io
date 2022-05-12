@@ -50,7 +50,7 @@ menu:
     url:               /devlife/
   - title:             Projects
     url:               /projects/
- - title:              Study
+  - title:             Study
     url:               /study/
   - title:             About
     url:               /about/
