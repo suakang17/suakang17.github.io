@@ -2,7 +2,7 @@
 layout: post
 title:  "에라토스테네스의 체"
 date:   2022-11-08 12:01:57 +0900
-categories: Algorithm
+categories: Study
 ---
 # 에라토스테네스의 체
 
