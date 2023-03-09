@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "[CS] API란? Json Place Holder와 공공데이터API 사용기"
-date:   2023-03-09 22:37:36 +0900
+title:  "API란 Json Place Holder와 공공데이터API 사용기"
+date:   2023-03-08 22:37:36 +0900
 categories: Study
 ---
 
