@@ -1,0 +1,38 @@
+{% assign provider = site.comments.provider | default:"disqus" %}
+{% if provider == "disqus" %}
+  {% assign disqus = site.disqus | default:site.disqus_shortname %}
+  {% if disqus %}
+    <!-- original disqus codes -->
+  {% endif %}
+{% elsif provider == "utterances" %}
+  {% assign utterances = site.utterances %}
+  {% if utterances.repo %}
+    <script src="https://utteranc.es/client.js"
+            repo={{ utterances.repo }}
+            issue-term={{ utterances.issue-term }}
+            label={{ utterances.label }}
+            theme={{ utterances.theme }}
+            crossorigin= "anonymous"
+            async>
+    </script>
+  {% endif %}
+{% elsif provider == "giscus" %}
+  {% assign giscus = site.giscus %}
+  {% if giscus.repo %}
+  <script src="https://giscus.app/client.js"
+            data-repo="suakang17/suakang17.github.io"
+            data-repo-id="R_kgDOGmuBaw"
+            data-category="Comments"
+            data-category-id="DIC_kwDOGmuBa84CU4xv"
+            data-mapping="pathname"
+            data-strict="0"
+            data-reactions-enabled="1"
+            data-emit-metadata="0"
+            data-input-position="bottom"
+            data-theme="light"
+            data-lang="ko"
+            crossorigin="anonymous"
+            async>
+</script>
+  {% endif %}
+{% endif %}
