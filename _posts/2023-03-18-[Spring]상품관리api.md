@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "[Spring] 상품 관리 api"
-date:   2023-03-19 13:48:27 +0900
+date:   2023-03-18 13:48:27 +0900
 categories: Study
 ---
 
@@ -148,33 +148,33 @@ postman 요청시 등록된 상품의 정보만 json으로 뜨고, 예외시 해
 
 - 상품 등록 성공
 
-<img src='../assets/img/docs/상품조회api_1.png' />
+<img src='/assets/img/docs/상품조회api_1.png' />
 
 - '노트북'이 이미 등록되어 있을 때, 동일 상품 등록으로 인한 상품 등록 실패
 
-<img src='../assets/img/docs/상품조회api_2.png' />
+<img src='/assets/img/docs/상품조회api_2.png' />
 
 - '노트북'이 이미 등록되어 있을 때, 새 상품 등록 성공
 
-<img src='../assets/img/docs/상품조회api_3.png' />
+<img src='/assets/img/docs/상품조회api_3.png' />
 
-<img src='../assets/img/docs/상품조회api_4.png' />
+<img src='/assets/img/docs/상품조회api_4.png' />
 
 - 전체 상품 조회 성공
 
-<img src='../assets/img/docs/상품조회api_5.png' />
+<img src='/assets/img/docs/상품조회api_5.png' />
 
 - 등록되지 않은 상품 조회 실패 (id로 조회시)
 
-<img src='../assets/img/docs/상품조회api_6.png' />
+<img src='/assets/img/docs/상품조회api_6.png' />
 
 - 상품 조회 성공 (id로 조회)
 
-<img src='../assets/img/docs/상품조회api_7.png' />
+<img src='/assets/img/docs/상품조회api_7.png' />
 
 - 상품 조회 성공 (상품명으로 조회)
 
-<img src='../assets/img/docs/상품조회api_8.png' />
+<img src='/assets/img/docs/상품조회api_8.png' />
 
 <br />
 
