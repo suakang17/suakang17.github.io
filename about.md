@@ -27,7 +27,7 @@ font-weight:bold">
 
 ## Personal Data
 ---
-> 1999.01.17 대한민국 서울특별시 출생
+> Seoul, Republic of Korea
 
 > email: rkdtndk09@gmail.com
 
@@ -35,9 +35,9 @@ font-weight:bold">
 
 ## Education
 ---
-> Mar.2019 ~  부산대학교(Pusan National University)
+> Mar.2019 ~ Aug.2023 부산대학교 해양학 학사 (Pusan National University Bachelor of Oceanography)
 
-## Project
+<!-- ## Project -->
 ## Experiences
 ---
 -2021. Sep ~ 2022. Feb Google Developer Students Club PNU 5th member
@@ -45,10 +45,12 @@ font-weight:bold">
 -2022. Jan ~ PROJECT BUSAN member
 
 -2022. Mar ~ UMC PNU server track member
+
+-2023. Jul ~ SAMSUNG Software Academy 10th (SSAFY)
 ## Skills and Certification
 ---
--Language : -
+-Language : Python, Java
 
--FrameWork: -
+-FrameWork: Spring, Spring Boot
 
--Certification : -
+<!-- -Certification : - -->
