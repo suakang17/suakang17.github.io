@@ -240,3 +240,21 @@ public class CaptionDto {
 
 그러려면 captionService에서 imageRepository에 접근해야하므로 서비스단에 해당 리포를 선언해주었다. 최종 수정된 서비스 save로직은 아래와 같다.
 
+```java
+public class CaptionService {
+
+    private final CaptionRepository captionRepository;
+
+    private final ImageRepository imageRepository;
+
+    public ResponseEntity<CaptionDto> save(CaptionDto captionDto) {
+
+        Image image = imageRepository.findByIdx(captionDto.getImageIdx())
+                .orElseThrow(() -> new IllegalArgumentException("해당 이미지가 존재하지 않습니다. idx=" + captionDto.getImageIdx()));
+
+        captionRepository.save(captionDto.toEntity(image));
+
+        return new ResponseEntity<>(captionDto, HttpStatus.OK);
+    }
+}
+```

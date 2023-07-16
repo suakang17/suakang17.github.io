@@ -28,7 +28,7 @@ description:           >
  Developer wannabe
 
 # A shorter description for the sidebar.
-tagline:               삽질하며 성장하는 기술 블로그
+tagline:               강수아의 삽질기
 # A list of keywords for your blog
 keywords:              [coding, developer, android, web, cloud, blog, sua]
 
@@ -385,7 +385,7 @@ plugins:
 # social:
 #   name:                <firstname> <lastname>
 #   links:
-#     - https://www.instagram.com/isumsgug/?hl=ko
+#     - https://www.instagram.com/un1versua/?hl=ko
 #     - https://github.com/suakang17
 
 
