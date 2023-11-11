@@ -3,6 +3,7 @@ layout: post
 title:  "소수 판별 알고리즘"
 date:   2022-11-08 12:01:57 +0900
 categories: Study
+published: False
 ---
 # [Algorithm] 소수 판별 알고리즘
 
