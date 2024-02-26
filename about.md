@@ -20,7 +20,6 @@ font-weight:bold">
 </span>
 </center>
 
-
 <center>Pusan National University</center>
 
 <center>Seoul, Republic of Korea</center>
@@ -42,15 +41,18 @@ font-weight:bold">
 ---
 -2021. Sep ~ 2022. Feb Google Developer Students Club PNU 5th member
 
--2022. Jan ~ PROJECT BUSAN member
+-2022. Jan ~ 2023. Jul PROJECT BUSAN member
 
--2022. Mar ~ UMC PNU server track member
+-2022. Mar ~ 2022. Dec UMC PNU server track member
 
--2023. Jul ~ SAMSUNG Software Academy 10th (SSAFY)
+-2023. Jul ~ 2023. Dec SAMSUNG Software Academy 10th (SSAFY)
+
+-2023. Dec ~ 2024. Feb SmileGate DevCamp 5th
+
 ## Skills and Certification
 ---
 -Language : Python, Java
 
--FrameWork: Spring, Spring Boot
+-FrameWork: Spring, Spring Boot, FastAPI
 
 <!-- -Certification : - -->
