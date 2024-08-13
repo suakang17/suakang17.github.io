@@ -3,7 +3,6 @@ layout: post
 title:  "[Java/SpringBoot] 🛠️ LocalDate, LocalDateTime 커스텀 직렬화 및 역직렬화: 사용자 Locale 기반 포맷팅 유틸 만들기"
 date:   2024-07-01 00:00:00 +0900
 categories: Devlife
-published: true
 ---
 
 # 🛠️ LocalDate/LocalDateTime 커스텀 직렬화 및 역직렬화: 로케일 기반 포맷 조정
