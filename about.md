@@ -49,6 +49,8 @@ font-weight:bold">
 
 -2023. Dec ~ 2024. Feb SmileGate DevCamp 5th
 
+-2024. Apr ~ SmileGateHoldings Digital Workspace Platform Backend Engineer
+
 ## Skills and Certification
 ---
 -Language : Python, Java
