@@ -1,0 +1,227 @@
+---
+layout: post  
+title:  "[LALALA] 채팅 서버 구현기"  
+date:   2024-05-01 00:00:00 +0900  
+categories: Devlife  
+published: true  
+---
+
+# LALALA 채팅 서버 리팩터링하기
+
+> Java / SpringBoot / MongoDB / Kafka
+
+## 1. Room 관련 리포지토리 개선
+
+채팅 서버의 핵심 데이터는 방(Room)과 메시지(ChatMessage)이었다. 이 두 가지 엔티티를 다루는 리포지토리의 개선은 서버의 성능과 확장성에 직접적인 영향을 미친다고 생각한다. 특히 MongoDB를 활용한 데이터 처리와 쿼리 최적화는 필수적이었다.
+
+### 1.1 RoomRepository 인터페이스 개선
+
+기존 `RoomRepository`는 방의 검색 및 사용자 관리가 비효율적이었다. 이를 해결하기 위해 다음과 같은 쿼리 메서드들을 추가했다:
+
+```java
+@Repository
+public interface RoomRepository extends MongoRepository<Room, String>, RoomRepositoryCustom {
+    @Query(value = "{'users.uid': ?0}", fields = "{'id': 1, 'roomName': 1, 'thumbnailImage': 1, 'createdAt': 1}")
+    List<Room> findJoinedRoomsByUid(Long uid, Sort sort, Pageable pageable);
+
+    @Query(value = "{'users.uid': {$ne: ?0}, 'createdAt': {$lt: ?1}}", sort = "{'createdAt': -1}")
+    List<Room> findUnjoinedRooms(Long uid, LocalDateTime lastCreatedAt, Pageable pageable);
+
+    boolean existsByIdAndUsersUidNot(String roomId, Long uid);
+}
+```
+
+- **`findJoinedRoomsByUid`**: 사용자가 참여한 방을 조회할 때, 필요한 필드만을 선택적으로 가져오도록 쿼리를 작성했다. 이는 네트워크 트래픽과 메모리 사용을 줄여 성능을 개선한다.
+- **`findUnjoinedRooms`**: 특정 사용자가 참여하지 않은 방을 시간 기준으로 정렬하여 조회할 수 있도록 했다. 대량의 데이터에서도 효율적으로 작동하도록 `createdAt` 필드를 활용했다.
+- **`existsByIdAndUsersUidNot`**: 방의 존재 여부를 확인하면서 사용자가 참여하지 않았는지를 체크하는 메서드로, 복잡한 조건을 메서드 이름으로 간결하게 표현했다.
+
+### 1.2 RoomRepositoryCustom 인터페이스 설계
+
+커스텀 쿼리 메서드를 위한 인터페이스를 설계하면서 각 메서드가 특정 책임을 가지도록 했다:
+
+```java
+public interface RoomRepositoryCustom {
+    void exitRoom(String roomId, Long uid);
+    UpdateResult addUserToRoom(String roomId, User user);
+    UpdateResult updateLastReadMsgId(String roomId, Long uid, String messageId);
+    void updatePlaylist(String roomId, Playlist playlist);
+}
+```
+
+- **단일 책임 원칙(SRP)**: 각 메서드가 특정한 책임을 가지도록 설계하여 코드의 가독성과 유지보수성을 높였다.
+- **`UpdateResult` 반환**: 업데이트 작업의 결과를 명확히 알 수 있어, 에러 처리와 로깅을 용이하게 한다.
+
+### 1.3 RoomRepositoryImpl 클래스 구현
+
+`RoomRepositoryCustom`의 메서드들을 실제로 구현하면서 MongoTemplate을 활용한 쿼리와 업데이트 연산을 적용했다:
+
+```java
+@Repository
+public class RoomRepositoryImpl implements RoomRepositoryCustom {
+    private final MongoTemplate mongoTemplate;
+
+    @Override
+    public void exitRoom(String roomId, Long uid) {
+        Query query = new Query(Criteria.where("_id").is(roomId));
+        Update update = new Update().pull("users", Query.query(Criteria.where("uid").is(uid)));
+        mongoTemplate.updateFirst(query, update, Room.class);
+    }
+
+    // ... 기타 메서드
+}
+```
+
+- **`MongoTemplate` 사용**: 복잡한 쿼리와 업데이트 연산을 유연하게 처리할 수 있는 도구이다.
+- **`pull` 연산자**: 배열에서 특정 조건의 요소를 효율적으로 제거하여 성능을 개선했다.
+
+## 2. ChatMessage 관련 리포지토리 개선
+
+메시지 처리 역시 성능 최적화의 중요한 부분이었다. `ChatMessageRepository`의 개선을 통해 메시지 조회와 페이징 성능을 향상시켰다.
+
+### 2.1 ChatMessageRepository 인터페이스 개선
+
+메시지의 마지막 기록을 빠르게 조회할 수 있도록 쿼리 메서드를 추가했다:
+
+```java
+public interface ChatMessageRepository extends MongoRepository<ChatMessage, String>, ChatMessageRepositoryCustom {
+    @Query(value = "{'roomId': ?0}", sort = "{'createdAt': -1}", fields = "{'_id': 0}", limit = 1)
+    ChatMessage getLastMessage(String roomId);
+}
+```
+
+- **`getLastMessage`**: 방의 마지막 메시지를 효율적으로 조회하기 위해 쿼리, 정렬, 필드 선택, 제한을 동시에 처리했다. 불필요한 데이터 전송을 방지하기 위해 `_id` 필드를 제외했다.
+
+### 2.2 ChatMessageRepositoryCustom 인터페이스 설계
+
+다양한 메시지 조회 요구사항을 처리하기 위해 커스텀 인터페이스를 정의했다:
+
+```java
+public interface ChatMessageRepositoryCustom {
+    List<ChatMessage> findMessagesNoOffset(String roomId, LocalDateTime lastMessageTime, int limit);
+    List<ChatMessage> getAllMessagesAtRoom(String roomId);
+    List<ChatMessage> getNewMessages(String roomId, String readMsgId);
+}
+```
+
+- **`findMessagesNoOffset`**: No-Offset 페이징을 통해 성능을 크게 개선했다.
+- **메서드 이름의 명확성**: 각 메서드의 목적을 이름만으로도 쉽게 이해할 수 있도록 했다.
+
+### 2.3 ChatMessageRepositoryImpl 클래스 구현
+
+`ChatMessageRepositoryCustom`의 메서드들을 MongoTemplate을 활용해 구현했다:
+
+```java
+@Repository
+@RequiredArgsConstructor
+public class ChatMessageRepositoryImpl implements ChatMessageRepositoryCustom {
+    private final MongoTemplate mongoTemplate;
+
+    @Override
+    public List<ChatMessage> findMessagesNoOffset(String roomId, LocalDateTime lastMessageTime, int limit) {
+        Criteria criteria = Criteria.where("roomId").is(roomId);
+        if (lastMessageTime != null) {
+            criteria.and("createdAt").lt(lastMessageTime);
+        }
+
+        Query query = Query.query(criteria)
+                .with(Sort.by(Sort.Direction.DESC, "createdAt"))
+                .limit(limit);
+
+        return mongoTemplate.find(query, ChatMessage.class);
+    }
+
+    // ... 기타 메서드
+}
+```
+
+- **`Criteria` 사용**: 동적 쿼리 생성을 용이하게 하여, 조건에 따라 유연하게 쿼리를 조정하고자 했다.
+- **`Sort`와 `limit` 조합**: 효율적인 페이징 처리를 통해 대량의 데이터에서도 성능을 유지할 수 있게 했다.
+- **Null 체크**: `lastMessageTime`이 null일 경우를 고려하여 안정성을 높였다.
+
+## 3. 이벤트 드리븐 아키텍처 도입
+
+이벤트 드리븐 아키텍처를 도입하여 시스템의 확장성과 유연성을 높였다. 이벤트 발생과 처리를 통해 비즈니스 로직과 이벤트 처리를 분리했다.
+
+### 3.1 이벤트 정의
+
+모든 채팅 이벤트의 공통 특성을 정의한 인터페이스와 각 이벤트 타입에 대한 클래스를 설계했다:
+
+```java
+public interface ChatEvent {
+    String getRoomId();
+    LocalDateTime getTimestamp();
+}
+
+public class MessageSentEvent implements ChatEvent {
+    private final String roomId;
+    private final String messageId;
+    private final LocalDateTime timestamp;
+    // ... 생성자, getter 등
+}
+
+public class UserJoinedRoomEvent implements ChatEvent {
+    private final String roomId;
+    private final Long userId;
+    private final LocalDateTime timestamp;
+    // ... 생성자, getter 등
+}
+```
+
+- **인터페이스 사용**: 모든 채팅 이벤트에 공통된 특성을 정의하여 일관성을 유지하려고 했다.
+- **불변 객체 사용**: 스레드 안전성과 예측 가능한 동작을 보장하고자 했다.
+- **이벤트별 클래스**: 각 이벤트 타입을 명확히 구분하여 설계했다.
+
+### 3.2 이벤트 발행
+
+비즈니스 로직에서 이벤트를 발생시키는 부분이다:
+
+```java
+@Service
+@RequiredArgsConstructor
+public class ChatService {
+    private final ApplicationEventPublisher eventPublisher;
+
+    public void sendMessage(ChatMessage message) {
+        // 메시지 저장 로직
+        eventPublisher.publishEvent(new MessageSentEvent(message.getRoomId(), message.getId(), LocalDateTime.now()));
+    }
+
+    public void joinRoom(String roomId, User user) {
+        // 사용자 방 참여 로직
+        eventPublisher.publishEvent(new UserJoinedRoomEvent(roomId, user.get
+
+Uid(), LocalDateTime.now()));
+    }
+}
+```
+
+- **`ApplicationEventPublisher` 사용**: 스프링의 이벤트 발행 메커니즘을 활용하여 비즈니스 로직과 이벤트 발행을 분리했다.
+- **이벤트에 타임스탬프 포함**: 이벤트 발생 시점을 정확히 추적할 수 있게 했다.
+
+### 3.3 이벤트 구독
+
+발행된 이벤트를 처리하는 리스너:
+
+```java
+@Component
+@RequiredArgsConstructor
+public class ChatEventListener {
+    private final NotificationService notificationService;
+
+    @EventListener
+    public void handleMessageSentEvent(MessageSentEvent event) {
+        notificationService.notifyNewMessage(event.getRoomId(), event.getMessageId());
+    }
+
+    @EventListener
+    public void handleUserJoinedRoomEvent(UserJoinedRoomEvent event) {
+        notificationService.notifyUserJoined(event.getRoomId(), event.getUserId());
+    }
+}
+```
+
+- **`@EventListener` 사용**: 스프링의 이벤트 리스너 메커니즘을 활용하여 이벤트를 처리했다.
+- **이벤트별 핸들러**: 각 이벤트 타입에 대해 별도의 핸들러를 제공하여 책임을 분리했다.
+- **`NotificationService` 주입**: 의존성 주입을 통해 느슨한 결합을 유지했다.
+
+추후에 리팩터링을 더 해봐야겠다. 아직도 먼 것 같구나..
