@@ -19,6 +19,8 @@ Jackson은 Java 객체를 JSON으로 직렬화하거나 JSON을 Java 객체로 �
 
 `DateTimeFormatterUtils` 클래스는 다양한 로케일에 맞춘 `DateTimeFormatter`를 관리한다. 이 클래스를 통해 애플리케이션의 국제화 요구 사항에 맞게 날짜와 시간 포맷을 동적으로 조정하고자 했다.
 
+사용할 때 Locale을 Key로 Map을 호출하기만 하면 된다.
+
 ```java
 public class DateTimeFormatterUtils {
     private DateTimeFormatterUtils() { throw new IllegalStateException("Utility class");}
