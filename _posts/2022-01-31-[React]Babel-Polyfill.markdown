@@ -3,6 +3,7 @@ layout: post
 title:  "[React]Babel-Polyfill only one 에러"
 date:   2022-01-31 12:49:10 +0900
 categories: Devlife
+published: False
 ---
 
 # [React] Babel-Polyfill only one 에러

@@ -3,6 +3,7 @@ layout: post
 title:  "[React]jsx에서 이미지가 엑박으로 나오는 에러"
 date:   2022-02-05 15:44:13 +0900
 categories: Devlife
+published: False
 ---
 # [React] jsx에서 이미지가 엑박으로 나오는 경우
 ## jsx파일 이미지 로드 안됨

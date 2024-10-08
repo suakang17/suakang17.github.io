@@ -3,6 +3,7 @@ layout: post
 title:  "[Spring]왕기초API만들기와 Lombok으로 로그찍기"
 date:   2023-03-14 11:19:37 +0900
 categories: Study
+published: False
 ---
 
 # [Spring] 아주아주 간단한 API만들기와 Lombok으로 로그찍기
