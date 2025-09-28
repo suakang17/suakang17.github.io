@@ -1,3 +1,11 @@
+---
+layout: post
+title:  "[DB] MyBatis 대용량 데이터 처리"
+date:   2025-09-25 00:00:00 +0900
+categories: Devlife
+---
+
+
 # MyBatis 대용량 데이터 처리, 삽질하면서 깨달은 진실들
 
 ## 시작: OOM과의 전쟁
