@@ -2,7 +2,7 @@
 layout: post
 title:  "[Spring] 객체 매핑 라이브러리 비교하기"
 date:   2025-06-13 00:00:00 +0900
-categories: Devlife
+categories: Study
 ---
 
 # [Spring] 객체 매핑 라이브러리 비교하기
