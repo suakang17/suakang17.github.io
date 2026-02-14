@@ -41,5 +41,3 @@ categories: Devlife
 ~~사담이지만 정말 너무 기뻐서 소리질렀다.~~
 
 <img src='/assets/img/docs/ubuntu_network_issue3.png' width='70%'/>  
-
-[도움받은 블로그] [https://nirsa.tistory.com/16](https://nirsa.tistory.com/16) 감사합니다 :)

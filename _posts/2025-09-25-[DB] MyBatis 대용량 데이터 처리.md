@@ -8,17 +8,16 @@ categories: Devlife
 
 # MyBatis 대용량 데이터 처리, 삽질하면서 깨달은 진실들
 
-## 시작: OOM과의 전쟁
+## 시작: OOM
 
 어느 날 서비스에서 OutOfMemoryError가 터졌다. 로그를 보니 사용자 데이터 전체를 조회하는 배치 작업에서 메모리가 터진 것이었다.
 
 ```java
-// 이 코드가 문제였다
 @Select("SELECT * FROM users")  // 300만 건...
 List<User> selectAllUsers();
 ```
 
-구글링을 해보니 대용량 데이터 처리 방법으로 **fetchSize**라는 게 있다고 한다. 
+찾아보니 대용량 데이터 처리 방법으로 **fetchSize**라는 게 있다고 한다. 
 
 ```java
 @Select("SELECT * FROM users")
@@ -28,7 +27,7 @@ List<User> selectAllUsers();
 
 설정하고 돌려보니 확실히 메모리 사용량이 줄어들었다. 1000개씩 가져오니까 당연한 거겠지?
 
-## 첫 번째 의문: 페이징이랑 뭐가 다른 거지?
+## 첫 번째 의문: 페이징과의 차이점
 
 생각해보니 이거랑 페이징이랑 뭐가 다른 거지 하는 생각이 들었다.
 
@@ -57,10 +56,10 @@ List<User> selectAllUsers();
 SELECT * FROM users
 
 -- fetchSize 있을 때  
-SELECT * FROM users  -- 어? 똑같네?
+SELECT * FROM users  
 ```
 
-어라? 쿼리는 똑같이 나간다. 그럼 fetchSize는 대체 뭘 하는 거지?
+쿼리는 똑같이 나간다. 그럼 fetchSize는 대체 뭘 하는 거지?
 
 더 파보니까 이런 거였다:
 
@@ -74,7 +73,7 @@ Client ←─ [1000건] ─← [1000건] ─← [1000건] ─← MySQL Server
        (조금씩 나눠서 받음)
 ```
 
-쿼리는 같지만 **데이터를 받는 방식**이 다른 거였다.
+쿼리는 같지만 데이터를 받는 방식이 다른 거였다.
 
 ## 세 번째 깨달음: 페이징과 근본적으로 다르다
 
@@ -123,7 +122,7 @@ void selectAllUsers(ResultHandler<User> handler);
 // 사용법
 userMapper.selectAllUsers(user -> {
     processUser(user);  // 처리하고
-    // user는 GC 대상이 됨, 메모리에 accumulate 안됨!
+    // user는 GC 대상이 됨, 메모리에 accumulate 안됨
 });
 ```
 
@@ -176,7 +175,7 @@ Application: [300만건 전부 저장] ← OOM!
 ```
 
 ## 여섯 번째 의문: 그럼 비동기 스트리밍인가?
-그런데 또 의문이 든다. ResultSet이 하나씩만 메모리에 올린다면, 혹시 비동기 스트리밍으로 받아오는 건가?
+ResultSet이 하나씩만 메모리에 올린다면, 혹시 비동기 스트리밍으로 받아오는 건가?
 만약 동기로 한 번에 다 받아온다면 결국 new ArrayList()랑 똑같은 거잖아. 서버에서 300만 건을 한 번에 보내고, 클라이언트가 한 번에 받으면 메모리 터져야 맞는데?
 그럼 이런 식으로 동작하는 건가?
 ```java
@@ -188,8 +187,7 @@ future1.thenAccept(user1 -> processUser(user1));
 future2.thenAccept(user2 -> processUser(user2));
 ```
 
-## 일곱 번째 깨달음: JDBC는 동기다
-아니었다. JDBC 자체가 동기로만 동작한다.
+근데 JDBC는 동기로만 동작한다.
 ```java
 public boolean next() throws SQLException {
     if (currentBuffer.isEmpty()) {
@@ -240,7 +238,7 @@ Database의 역할
 - 쿼리 실행하고 커서 위치 기억
 - 요청받으면 다음 청크 전송
 
-MyBatis는 스트리밍을 모른다! 그냥 평범하게 ResultSet을 순회할 뿐이고, 실제 스트리밍은 JDBC Driver가 알아서 한다.
+MyBatis는 스트리밍을 모른다. 그냥 평범하게 ResultSet을 순회할 뿐이고, 실제 스트리밍은 JDBC Driver가 알아서 한다.
 
 ## 추추가
 진짜 비동기가 필요하면 R2DBC 써야 한다.
@@ -261,4 +259,4 @@ userFlux
 - 사용자 UI: 페이징
 - 진짜 비동기: R2DBC
 
-삽질하면서 배운 게 제일 머리에 남는다. 🤯
+삽질하면서 배운 게 제일 머리에 남는다. 

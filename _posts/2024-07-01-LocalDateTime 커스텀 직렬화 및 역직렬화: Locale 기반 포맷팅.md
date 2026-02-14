@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "[Java/SpringBoot] 🛠️ LocalDate, LocalDateTime 커스텀 직렬화 및 역직렬화: 사용자 Locale 기반 포맷팅 유틸 만들기"
+title:  "[Java/SpringBoot] LocalDate, LocalDateTime 커스텀 직렬화 및 역직렬화: 사용자 Locale 기반 포맷팅 유틸 만들기"
 date:   2024-07-01 00:00:00 +0900
 categories: Devlife
 ---
 
-# 🛠️ LocalDate/LocalDateTime 커스텀 직렬화 및 역직렬화: 로케일 기반 포맷 조정
+# LocalDate/LocalDateTime 커스텀 직렬화 및 역직렬화: 로케일 기반 포맷 조정
 
 ## 개요
 진행 중인 프로젝트에서 LocalDate, LocalDateTime 객체를 JSON으로 직렬화하고 역직렬화할 때, 로케일에 맞춘 포맷을 적용해야 할 필요가 생겼다. Jackson 라이브러리와 Map을 활용하여 LocalDate, LocalDateTime의 포맷을 로케일에 따라 조정하는 커스텀 직렬화기와 역직렬화기를 구현해보았다. 
@@ -124,7 +124,7 @@ public class JacksonConfig {
 
 1. **포맷 일관성 유지**: 다양한 로케일에 맞는 포맷을 자동으로 적용함으로써 데이터의 일관성을 유지할 수 있다. 지금 프로젝트처럼 다양한 Locale 사용자를 가진 애플리케이션에서 유용할 것 같다.
 
-2. **프론트엔드의 데이터 처리 간소화**: JSON 응답에서 날짜와 시간 정보를 일관되게 표시함으로써, 프론트엔드 개발자들이 데이터를 파싱할 필요가 없어져 좋아했다. ㅎㅎ
+2. **프론트엔드의 데이터 처리 간소화**: JSON 응답에서 날짜와 시간 정보를 일관되게 표시함으로써, 프론트엔드 개발자들이 데이터를 파싱할 필요가 없어져 좋아했다.
 
 3. **유지보수 용이성**: 포맷 변경이 필요할 때, 이 파일 하낙로 변경을 관리하면 된다.
 
