@@ -5,6 +5,8 @@ date: 2026-02-28 00:00:00 +0900
 categories: Study
 ---
 
+# [MongoDB] 단일 서버(Standalone)에서 트랜잭션이 불가능한 이유
+
 ## 들어가며
 
 Spring Data JPA와 RDBMS(MySQL, Oracle 등) 환경에 익숙한 사람이 MongoDB를 도입할 때 가장 먼저 당황하는 부분 중 하나가 바로 트랜잭션이라고 한다. 
